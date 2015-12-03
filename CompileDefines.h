@@ -10,3 +10,7 @@ extern "C" void init_NSURLConnection_hook();
 #ifdef NSURLConnection
 init_NSURLConnection_hook();
 #endif
+extern "C" void init_TapJoy_hook();
+#ifdef TapJoy
+init_TapJoy_hook();
+#endif

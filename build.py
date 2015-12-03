@@ -38,6 +38,22 @@ def toggleModule():
 			toggleString=toggleString+"#ifdef"+" "+componentName+"\n"
 			toggleString+="init_"+componentName+"_hook();\n";
 			toggleString+="#endif\n"
+	AdWallFileList=listdir("./Hooks/AdWall/")
+	for x in AdWallFileList:
+		if(x.endswith(".mm")==False and x.endswith(".m")==False and x.endswith(".xm")==False):
+			print x+" "+"Not A Code File"
+		else:
+			componentList=x.split(".")
+			componentName=""
+			i=0
+			while i<len(componentList[i])-1:#ModuleName
+				componentName+=componentList[i]
+				i+=1
+			global toggleString
+			toggleString+="extern \"C\" void init_"+componentName+"_hook();\n"
+			toggleString=toggleString+"#ifdef"+" "+componentName+"\n"
+			toggleString+="init_"+componentName+"_hook();\n";
+			toggleString+="#endif\n"
 	#print toggleString
 		os.system("touch"+" "+"./CompileDefines.h")
 		fileHandle=open("./CompileDefines.h","w")
@@ -64,6 +80,13 @@ def subModuleList():
 			print x+" "+"Not A Code File"
 		else:
 			string=" "+"Hooks/APIHooks/"+x
+			returnString+=string
+	AdWallList=listdir("./Hooks/AdWall/")
+	for x in AdWallList:
+		if(x.endswith(".mm")==False and x.endswith(".m")==False and x.endswith(".xm")==False):
+			print x+" "+"Not A Code File"
+		else:
+			string=" "+"Hooks/AdWall/"+x
 			returnString+=string
 	FileList3=listdir("./Hooks/")
 	for x in FileList3:

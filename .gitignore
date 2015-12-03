@@ -1,2 +1,4 @@
 ./Makefile
 ./obj
+obj/
+Makefile

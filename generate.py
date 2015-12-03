@@ -9,13 +9,15 @@ outPath="./Hooks/"
 if(len(sys.argv)<2):
 	print "generate.py ModuleType ModuleName"
 	sys.exit(-1)
-if(sys.argv[1]!="SDK" and sys.argv[1]!="API"):
+if(sys.argv[1]!="SDK" and sys.argv[1]!="API" and sys.argv[1]!="AdWall"):
 	print "Wrong Argument"
 else:
 	if(sys.argv[1]=="SDK"):
 		outPath=outPath+"SDKSpecific/"+sys.argv[2]+".xm"
 	elif(sys.argv[1]=="API"):
 		outPath=outPath+"APIHooks/"+sys.argv[2]+".xm"
+	elif(sys.argv[1]=="AdWall"):
+		outPath=outPath+"AdWall/"+sys.argv[2]+".xm"
 	else:
 		print "Unknown Module Type"
 		sys.exit(-1)
