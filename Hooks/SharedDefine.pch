@@ -1,1 +1,2 @@
 #define GADadUnitID @"ca-app-pub-12450520124503520/6666666666"
+#define AdURL @"http://127.0.0.1"
