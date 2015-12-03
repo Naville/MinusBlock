@@ -1,6 +1,6 @@
 #MinusBlock
 >A Brand New AdBlocking Solution
->No Code(Yet),Just Setting Things Up.
+>Not Finished(Yet),Just Setting Things Up.
 Three Components in Plan:
 >>Run build.py to build
 >>>URL Layer Hijack,Using Subscriptions From AdBlock Project.

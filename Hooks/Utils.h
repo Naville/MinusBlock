@@ -3,6 +3,6 @@
 }
 
 + (NSArray*)filterList;
-//+(BOOL)checkURL:(NSString*)URL;
++(BOOL)checkURL:(NSString*)URL;
 
 @end

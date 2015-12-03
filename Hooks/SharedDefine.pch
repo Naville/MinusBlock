@@ -1,2 +1,3 @@
 #define GADadUnitID @"ca-app-pub-12450520124503520/6666666666"
 #define AdURL @"http://127.0.0.1"
+#define AdBlockSubscriptionListConst [NSArray arrayWithObjects:@"https://easylist-downloads.adblockplus.org/easylist.txt",@"https://easylist-downloads.adblockplus.org/adwarefilters.txt",@"https://easylist-downloads.adblockplus.org/easylistchina.txt",nil]
