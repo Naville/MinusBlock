@@ -1,6 +1,5 @@
 #import "../SharedDefine.pch"
-%group GoogleAd
-
+%group GoogleAD
 
 %hook GADInterstitial
 - (id)initWithAdUnitID:(NSString *)adUnitID{
@@ -10,10 +9,14 @@ return %orig(GADadUnitID);
 }
 %end
 
-
-
-
-
-
 %end
+
+extern "C" void init_GoogleAdMob_hook(){
+        %init(GoogleAD);
+}
+
+
+
+
+
 
