@@ -1,6 +1,11 @@
 #import "../SharedDefine.pch"
 %group InMobi
-//Insert Your Hook Here
+%hook IMSdk
++ (void)initWithAccountID:(NSString *)accountID{
+
+	%orig(InMobiAccountID);
+}
+%end
 %end
 extern "C" void init_InMobi_hook(){
 %init(InMobi);

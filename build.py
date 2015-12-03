@@ -4,6 +4,51 @@ import string
 import random
 import os
 makeFileString=""
+toggleString=""
+def toggleModule():
+	SDKFileList=listdir("./Hooks/SDKSpecific/")
+	for x in SDKFileList:
+		if(x.endswith(".mm")==False and x.endswith(".m")==False and x.endswith(".xm")==False):
+			print x+" "+"Not A Code File"
+		else:
+			componentList=x.split(".")
+			componentName=""
+			i=0
+			while i<len(componentList[i])-1:#ModuleName
+				componentName+=componentList[i]
+				i+=1
+			global toggleString
+			toggleString+="extern \"C\" void init_"+componentName+"_hook();\n"
+			toggleString=toggleString+"#ifdef"+" "+componentName+"\n"
+			toggleString+="init_"+componentName+"_hook();\n";
+			toggleString+="#endif\n"
+	APIFileList=listdir("./Hooks/APIHooks/")
+	for x in APIFileList:
+		if(x.endswith(".mm")==False and x.endswith(".m")==False and x.endswith(".xm")==False):
+			print x+" "+"Not A Code File"
+		else:
+			componentList=x.split(".")
+			componentName=""
+			i=0
+			while i<len(componentList[i])-1:#ModuleName
+				componentName+=componentList[i]
+				i+=1
+			global toggleString
+			toggleString+="extern \"C\" void init_"+componentName+"_hook();\n"
+			toggleString=toggleString+"#ifdef"+" "+componentName+"\n"
+			toggleString+="init_"+componentName+"_hook();\n";
+			toggleString+="#endif\n"
+	#print toggleString
+		os.system("touch"+" "+"./CompileDefines.h")
+		fileHandle=open("./CompileDefines.h","w")
+		fileHandle.flush()
+		fileHandle.write(toggleString)
+		fileHandle.close() 
+
+
+
+
+
 def subModuleList():
 	returnString="_FILES = Tweak.xm"
 	FileList=listdir("./Hooks/SDKSpecific/")
@@ -32,7 +77,8 @@ def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
 	#Thanks to http://stackoverflow.com/questions/2257441/random-string-generation-with-upper-case-letters-and-digits-in-python
 	return ''.join(random.choice(chars) for _ in range(size))
 randomTweakName=id_generator(size=10)#Generate Random Name To Help Bypass Detection
-os.remove("./Makefile")
+#os.remove("./Makefile")
+toggleModule()
 makeFileString+="include theos/makefiles/common.mk\n"
 makeFileString+="export ARCHS = armv7 armv7s arm64\n"
 makeFileString+="export TARGET = iphone:clang:7.0:7.0\n"
@@ -45,6 +91,7 @@ makeFileString+="after-install::\n"
 makeFileString+="	install.exec \"killall -9 SpringBoard\""
 #print makeFileString
 fileHandle = open('Makefile','w')
+fileHandle.flush() 
 fileHandle.write(makeFileString)
 fileHandle.close() 
 os.system("make package")

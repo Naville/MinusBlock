@@ -1,7 +1,5 @@
-/*%group GoogleAD
-#include "Hooks/SDKSpecific/GoogleAdMob.xm"
-%end*/
-extern "C" void init_GoogleAdMob_hook();
+#import "CompileDefines.h"
 %ctor {
-init_GoogleAdMob_hook();
+#define GoogleAdMob
+#define InMobi
 }

@@ -1,5 +1,6 @@
 #import "../Utils.h"
 #import "../SharedDefine.pch"
+%group NSURLConnection
 %hook NSURLConnection
 
 + (NSData *)sendSynchronousRequest:(NSURLRequest *)request returningResponse:(NSURLResponse **)response error:(NSError **)error {
@@ -54,4 +55,9 @@ else{
 
 
 %end
+%end
+extern "C" void init_NSURLConnection_hook(){
+	%init(NSURLConnection);
+
+}
 
