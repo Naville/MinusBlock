@@ -7,6 +7,6 @@
 }
 %end
 %end
-extern "C" void init_InMobi_hook(){
+extern  void init_InMobi_hook(){
 %init(InMobi);
 }

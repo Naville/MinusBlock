@@ -25,7 +25,7 @@ else:
 	xmString=xmString+"%group"+" "+sys.argv[2]+"\n"
 	xmString+="//Insert Your Hook Here\n"
 	xmString+="%end\n"
-	xmString+="extern \"C\" void init_"+sys.argv[2]+"_hook(){\n"
+	xmString+="extern void init_"+sys.argv[2]+"_hook(){\n"
 	xmString+="%init("+sys.argv[2]+");\n"
 	xmString+="}\n"
 	os.system("touch"+outPath)

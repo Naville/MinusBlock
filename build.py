@@ -5,12 +5,12 @@ import random
 import os
 makeFileString=""
 global toggleString
-toggleString=""
+toggleString="void GlobalInit(){\n"
 def toggleModule():
 	SDKFileList=listdir("./Hooks/SDKSpecific/")
 	for x in SDKFileList:
-		if(x.endswith(".mm")==False and x.endswith(".m")==False and x.endswith(".xm")==False):
-			print x+" "+"Not A Code File"
+		if(x.endswith(".xm")==False):
+			print x+" "+"Not A Theos Code File"
 		else:
 			componentList=x.split(".")
 			componentName=""
@@ -19,14 +19,14 @@ def toggleModule():
 				componentName+=componentList[i]
 				i+=1
 			global toggleString
-			toggleString=toggleString+"#ifdef"+" "+componentName+"\n"
-			toggleString+="extern \"C\" void init_"+componentName+"_hook();\n"
+			#toggleString=toggleString+"#ifdef"+" "+componentName+"\n"
+			toggleString+="extern  void init_"+componentName+"_hook();\n"
 			toggleString+="init_"+componentName+"_hook();\n";
-			toggleString+="#endif\n"
+			#toggleString+="#endif\n"
 	APIFileList=listdir("./Hooks/APIHooks/")
 	for x in APIFileList:
-		if(x.endswith(".mm")==False and x.endswith(".m")==False and x.endswith(".xm")==False):
-			print x+" "+"Not A Code File"
+		if(x.endswith(".xm")==False):
+			print x+" "+"Not A Theos Code File"
 		else:
 			componentList=x.split(".")
 			componentName=""
@@ -35,13 +35,13 @@ def toggleModule():
 				componentName+=componentList[i]
 				i+=1
 			#global toggleString
-			toggleString+="extern \"C\" void init_"+componentName+"_hook();\n"
-			toggleString=toggleString+"#ifdef"+" "+componentName+"\n"
+			toggleString+="extern void init_"+componentName+"_hook();\n"
+			#toggleString=toggleString+"#ifdef"+" "+componentName+"\n"
 			toggleString+="init_"+componentName+"_hook();\n";
-			toggleString+="#endif\n"
+			#toggleString+="#endif\n"
 	AdWallFileList=listdir("./Hooks/AdWall/")
 	for x in AdWallFileList:
-		if(x.endswith(".mm")==False and x.endswith(".m")==False and x.endswith(".xm")==False):
+		if(x.endswith(".xm")==False):
 			print x+" "+"Not A Code File"
 		else:
 			componentList=x.split(".")
@@ -51,13 +51,14 @@ def toggleModule():
 				componentName+=componentList[i]
 				i+=1
 			#global toggleString
-			toggleString+="extern \"C\" void init_"+componentName+"_hook();\n"
-			toggleString=toggleString+"#ifdef"+" "+componentName+"\n"
+			toggleString+="extern void init_"+componentName+"_hook();\n"
+			#toggleString=toggleString+"#ifdef"+" "+componentName+"\n"
 			toggleString+="init_"+componentName+"_hook();\n";
-			toggleString+="#endif\n"
+			#toggleString+="#endif\n"
 		print toggleString
-		os.system("touch"+" "+"./CompileDefines.h")
-		fileHandle=open("./CompileDefines.h","w")
+		toggleString+="}\n"
+		os.system("touch"+" "+"./CompileDefines.xm")
+		fileHandle=open("./CompileDefines.xm","w")
 		fileHandle.flush()
 		fileHandle.write(toggleString)
 		fileHandle.close() 
@@ -67,7 +68,7 @@ def toggleModule():
 
 
 def subModuleList():
-	returnString="_FILES = Tweak.xm"
+	returnString="_FILES = Tweak.xm CompileDefines.xm"
 	FileList=listdir("./Hooks/SDKSpecific/")
 	for x in FileList:
 		if(x.endswith(".mm")==False and x.endswith(".m")==False and x.endswith(".xm")==False):

@@ -11,7 +11,7 @@ return %orig(GADadUnitID);
 
 %end
 
-extern "C" void init_GoogleAdMob_hook(){
+extern  void init_GoogleAdMob_hook(){
         %init(GoogleAD);
 }
 

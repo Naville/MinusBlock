@@ -12,6 +12,6 @@
 }
 %end
 %end
-extern "C" void init_AdView_hook(){
+extern  void init_AdView_hook(){
 %init(AdView);
 }

@@ -56,7 +56,7 @@ else{
 
 %end
 %end
-extern "C" void init_NSURLConnection_hook(){
+extern  void init_NSURLConnection_hook(){
 	%init(NSURLConnection);
 
 }

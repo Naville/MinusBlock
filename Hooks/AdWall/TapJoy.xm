@@ -14,6 +14,6 @@
 }
 %end
 %end
-extern "C" void init_TapJoy_hook(){
+extern  void init_TapJoy_hook(){
 %init(TapJoy);
 }
