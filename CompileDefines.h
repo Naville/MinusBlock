@@ -1,9 +1,17 @@
-extern "C" void init_GoogleAdMob_hook();
+#ifdef AdView
+extern "C" void init_AdView_hook();
+init_AdView_hook();
+#endif
+#ifdef AdViewVideoDelegate
+extern "C" void init_AdViewVideoDelegate_hook();
+init_AdViewVideoDelegate_hook();
+#endif
 #ifdef GoogleAdMob
+extern "C" void init_GoogleAdMob_hook();
 init_GoogleAdMob_hook();
 #endif
-extern "C" void init_InMobi_hook();
 #ifdef InMobi
+extern "C" void init_InMobi_hook();
 init_InMobi_hook();
 #endif
 extern "C" void init_NSURLConnection_hook();

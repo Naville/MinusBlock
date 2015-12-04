@@ -32,6 +32,7 @@ else:
 	fileHandle=open(outPath,"w")
 	fileHandle.write(xmString)
 	fileHandle.close() 
+	print "Generated At"+outPath
 
 
 

@@ -4,6 +4,7 @@ import string
 import random
 import os
 makeFileString=""
+global toggleString
 toggleString=""
 def toggleModule():
 	SDKFileList=listdir("./Hooks/SDKSpecific/")
@@ -18,8 +19,8 @@ def toggleModule():
 				componentName+=componentList[i]
 				i+=1
 			global toggleString
-			toggleString+="extern \"C\" void init_"+componentName+"_hook();\n"
 			toggleString=toggleString+"#ifdef"+" "+componentName+"\n"
+			toggleString+="extern \"C\" void init_"+componentName+"_hook();\n"
 			toggleString+="init_"+componentName+"_hook();\n";
 			toggleString+="#endif\n"
 	APIFileList=listdir("./Hooks/APIHooks/")
@@ -33,7 +34,7 @@ def toggleModule():
 			while i<len(componentList[i])-1:#ModuleName
 				componentName+=componentList[i]
 				i+=1
-			global toggleString
+			#global toggleString
 			toggleString+="extern \"C\" void init_"+componentName+"_hook();\n"
 			toggleString=toggleString+"#ifdef"+" "+componentName+"\n"
 			toggleString+="init_"+componentName+"_hook();\n";
@@ -49,12 +50,12 @@ def toggleModule():
 			while i<len(componentList[i])-1:#ModuleName
 				componentName+=componentList[i]
 				i+=1
-			global toggleString
+			#global toggleString
 			toggleString+="extern \"C\" void init_"+componentName+"_hook();\n"
 			toggleString=toggleString+"#ifdef"+" "+componentName+"\n"
 			toggleString+="init_"+componentName+"_hook();\n";
 			toggleString+="#endif\n"
-	#print toggleString
+		print toggleString
 		os.system("touch"+" "+"./CompileDefines.h")
 		fileHandle=open("./CompileDefines.h","w")
 		fileHandle.flush()
@@ -117,6 +118,7 @@ fileHandle = open('Makefile','w')
 fileHandle.flush() 
 fileHandle.write(makeFileString)
 fileHandle.close() 
+os.system("make clean")
 os.system("make package")
 
 
