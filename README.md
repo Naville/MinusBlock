@@ -1,9 +1,13 @@
 #MinusBlock
 >A Brand New AdBlocking Solution
->Not Finished(Yet),Just Setting Things Up.
+>Not Finished(Yet).Also NOT Tested
 >>Run build.py to build
 >>generate.py to generate a new template
+
+
 Three Components in Plan:
+
+
 >>>URL Layer Hijack,Using Subscriptions From AdBlock Project.
 
 >>>Socket Layer&NSJSON**** Layer Hijack

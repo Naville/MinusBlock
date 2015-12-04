@@ -1,7 +1,19 @@
 #import "./Utils.h"
 #import "./SharedDefine.pch"
 @implementation Utils : NSObject
-+ (NSArray*)filterList{
+@synthesize filterList = _filterList;
++(id)sharedManager{
+ 	static Utils *sharedUtils = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedUtils = [[self alloc] init];
+    });
+    return sharedUtils;
+
+
+}
+
+-(void)setup{
 NSMutableArray* returnArray=[NSMutableArray array];
 NSArray* AdBlockSubscriptionList=AdBlockSubscriptionListConst;
 	for(int i=0;i<[AdBlockSubscriptionList count];i++){
@@ -11,10 +23,10 @@ NSArray* AdBlockSubscriptionList=AdBlockSubscriptionListConst;
 		//Comments in the original file can safely be ignored
 
 	}
-	return returnArray;
+_filterList=returnArray;
 }
-+(BOOL)checkURL:(NSString*)URL{
-NSArray* regularList=[Utils filterList];
+-(BOOL)checkURL:(NSString*)URL{
+NSArray* regularList=_filterList;
 	for(int i =0;i<regularList.count;i++){
 		if ([URL rangeOfString:[regularList objectAtIndex:i] options:NSRegularExpressionSearch].location != NSNotFound){
 

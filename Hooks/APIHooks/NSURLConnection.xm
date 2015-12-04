@@ -5,7 +5,8 @@
 
 + (NSData *)sendSynchronousRequest:(NSURLRequest *)request returningResponse:(NSURLResponse **)response error:(NSError **)error {
 NSString* requestString=request.URL.absoluteString;
-if([Utils checkURL:requestString]){
+
+if([[Utils sharedManager] checkURL:requestString]){
 
 	return %orig;
 }
@@ -22,7 +23,7 @@ else{
 
 - (id)initWithRequest:(NSURLRequest *)request delegate:(id)delegate {
 	NSString* requestString=request.URL.absoluteString;
-if([Utils checkURL:requestString]){
+if([[Utils sharedManager] checkURL:requestString]){
 
 	return %orig;
 }
@@ -40,7 +41,7 @@ else{
 
 - (id)initWithRequest:(NSURLRequest *)request delegate:(id)delegate startImmediately:(BOOL)startImmediately {
 NSString* requestString=request.URL.absoluteString;
-if([Utils checkURL:requestString]){
+if([[Utils sharedManager] checkURL:requestString]){
 
 	return %orig;
 }

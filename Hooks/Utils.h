@@ -1,9 +1,10 @@
 @interface Utils : NSObject {
 
 }
-
-+ (NSArray*)filterList;
-+(BOOL)checkURL:(NSString*)URL;
+@property (atomic, copy) NSArray *filterList;
++(id)sharedManager;
+-(void)setup;
+-(BOOL)checkURL:(NSString*)URL;
 +(NSMutableArray*)classListForSelector:(SEL)Selector;
 
 @end

@@ -13,7 +13,7 @@ olddmOfferWallManager(self,_cmd,manager,[NSNumber numberWithInt:999999],[NSNumbe
 void (*oldDM2)(id self,SEL _cmd,DMOfferWallManager * manager,DMOfferWallConsumeStatus statusCode,NSNumber * totalPoint,NSNumber *consumedPoint);
 void newDM2(id self,SEL _cmd,DMOfferWallManager * manager,DMOfferWallConsumeStatus statusCode,NSNumber * totalPoint,NSNumber *consumedPoint){
 
-olddmOfferWallManager(self,_cmd,manager,eDMOfferWallConsumeSuccess,[NSNumber numberWithInt:999999],[NSNumber numberWithInt:0]);
+oldDM2(self,_cmd,manager,eDMOfferWallConsumeSuccess,[NSNumber numberWithInt:999999],[NSNumber numberWithInt:0]);
 
 }
 
