@@ -1,3 +1,5 @@
+#import "Utils.h"
+#import <substrate.h>
 #define GADadUnitID @"ca-app-pub-12450520124503520/6666666666"
 #define InMobiAccountID @"InochiWaUtsukushii"
 #define AdURL @"http://127.0.0.1"

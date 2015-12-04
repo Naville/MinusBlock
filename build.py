@@ -56,12 +56,12 @@ def toggleModule():
 			toggleString+="init_"+componentName+"_hook();\n";
 			#toggleString+="#endif\n"
 		print toggleString
-		toggleString+="}\n"
-		os.system("touch"+" "+"./CompileDefines.xm")
-		fileHandle=open("./CompileDefines.xm","w")
-		fileHandle.flush()
-		fileHandle.write(toggleString)
-		fileHandle.close() 
+	toggleString+="}\n"
+	os.system("touch"+" "+"./CompileDefines.xm")
+	fileHandle=open("./CompileDefines.xm","w")
+	fileHandle.flush()
+	fileHandle.write(toggleString)
+	fileHandle.close() 
 
 
 

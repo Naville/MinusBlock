@@ -27,4 +27,29 @@ NSArray* regularList=[Utils filterList];
 	return TRUE;
 
 }
++(NSMutableArray*)classListForSelector:(SEL)Selector{
+int numClasses;
+NSMutableArray* returnArray=[NSMutableArray array];
+Class *classes = NULL;
+
+classes = NULL;
+numClasses = objc_getClassList(NULL, 0);
+NSLog(@"Number of classes: %d", numClasses);
+
+if (numClasses > 0 )
+{
+    classes = (__unsafe_unretained Class *)malloc(sizeof(Class) * numClasses);
+    numClasses = objc_getClassList(classes, numClasses);
+    for (int i = 0; i < numClasses; i++) {
+        id obj=[[classes[i] alloc] init];
+        if([obj respondsToSelector:Selector]){
+
+        [returnArray addObject:NSStringFromClass([obj class])];
+        }
+    }
+    free(classes);
+}
+
+return returnArray;
+}
 @end
