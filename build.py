@@ -3,6 +3,7 @@ from os import listdir
 import string
 import random
 import os
+import sys
 makeFileString=""
 global toggleString
 toggleString="void GlobalInit(){\n"
@@ -55,7 +56,7 @@ def toggleModule():
 			#toggleString=toggleString+"#ifdef"+" "+componentName+"\n"
 			toggleString+="init_"+componentName+"_hook();\n";
 			#toggleString+="#endif\n"
-		print toggleString
+		#print toggleString
 	toggleString+="}\n"
 	os.system("touch"+" "+"./CompileDefines.xm")
 	fileHandle=open("./CompileDefines.xm","w")
@@ -98,12 +99,21 @@ def subModuleList():
 			string=" "+"Hooks/"+x
 			returnString+=string
 	return returnString
-def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
+def id_generator(size=15, chars=string.ascii_uppercase + string.digits):
 	#Thanks to http://stackoverflow.com/questions/2257441/random-string-generation-with-upper-case-letters-and-digits-in-python
 	return ''.join(random.choice(chars) for _ in range(size))
-randomTweakName=id_generator(size=10)#Generate Random Name To Help Bypass Detection
+randomTweakName=id_generator()#Generate Random Name To Help Bypass Detection
 #os.remove("./Makefile")
 toggleModule()
+if (os.path.exists("theos")==False):
+	print "Theos Link Doesn't Exist,Creating"
+	if(os.environ.get('THEOS')!=None):
+		os.system("ln -s $THEOS theos")
+	else:
+		print "$THEOS ENV Not Set"
+		sys.exit(255)
+else:
+	print "Theos Link Exists at"+os.getcwd()+"/theos"+",Building"
 makeFileString+="include theos/makefiles/common.mk\n"
 makeFileString+="export ARCHS = armv7 armv7s arm64\n"
 makeFileString+="export TARGET = iphone:clang:7.0:7.0\n"
