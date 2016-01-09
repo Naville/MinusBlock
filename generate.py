@@ -28,7 +28,7 @@ else:
 	xmString+="extern void init_"+sys.argv[2]+"_hook(){\n"
 	xmString+="%init("+sys.argv[2]+");\n"
 	xmString+="}\n"
-	os.system("touch"+outPath)
+	os.system("touch "+outPath)
 	fileHandle=open(outPath,"w")
 	fileHandle.write(xmString)
 	fileHandle.close() 

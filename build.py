@@ -129,7 +129,9 @@ fileHandle = open('Makefile','w')
 fileHandle.flush() 
 fileHandle.write(makeFileString)
 fileHandle.close() 
+os.system("cp ./MinusBlock.plist ./"+randomTweakName+".plist")
 os.system("make clean")
 os.system("make package")
+os.system("rm ./"+randomTweakName+".plist")
 
 

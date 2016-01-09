@@ -16,6 +16,9 @@ Three Components in Plan:
 ELSE TODO:
 Module On/Off in Build.py
 
+Bugs:
+Domob Adwall Causes Random Crash
+
 
 
 

@@ -2,9 +2,9 @@ Package: naville.minusblock
 Name: MinusBlock
 Depends: mobilesubstrate
 Architecture: iphoneos-arm
-Description: An awesome MobileSubstrate tweak!
+Description: Advanced Advertisement Blocking System
 Maintainer: Naville
 Author: Naville
 Section: Tweaks
-Version: 0.0.1-14
+Version: 3.0.0-19
 Installed-Size: 168
