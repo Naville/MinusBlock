@@ -134,5 +134,7 @@ os.system("make clean")
 os.system("make package")
 os.system("rm ./"+randomTweakName+".plist")
 os.system("rm ./Makefile")
+os.system("rm -rf ./_")
+os.system("rm -rf ./obj")
 
 

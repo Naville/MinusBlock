@@ -15,6 +15,15 @@
 
 -(void)setup{
 NSMutableArray* LocalArray=[NSMutableArray arrayWithContentsOfFile:FiltListPath];
+NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+[dateFormatter setDateFormat:@"EEEE"];
+NSString *stringDate = [dateFormatter stringFromDate:[NSDate date]];
+if(![stringDate isEqualToString:@"Monday"]){
+
+
+}
+else{
+//Refresh List Only On Monday
 dispatch_queue_t imageQueue = dispatch_queue_create("FilterUpdate",NULL);
 dispatch_async(imageQueue, ^{
     NSMutableArray* returnArray=[NSMutableArray array];
@@ -28,7 +37,7 @@ dispatch_async(imageQueue, ^{
         
         
 }); 
-
+}
 _filterList=LocalArray;
 }
 -(BOOL)checkURL:(NSString*)URL{

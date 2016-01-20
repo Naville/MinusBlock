@@ -6,6 +6,15 @@
 	return TRUE;
 }
 %end
+%hook TMPostAppInstallViewModel
+-(id)initWithPost:(id)arg1 viewConfiguration:(id)arg2{
+
+	return nil;
+}
+-(bool)isAppInstalled{
+	return YES;
+}
+%end
 %hook TMAdvertisement
 +(BOOL) isRecommendationType:(int)type{
 	return FALSE;
