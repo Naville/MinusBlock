@@ -19,6 +19,8 @@ extern  void init_Tapdaq_hook();
 init_Tapdaq_hook();
 extern  void init_Tieba_hook();
 init_Tieba_hook();
+extern  void init_Tumblr_hook();
+init_Tumblr_hook();
 extern  void init_UnityAD_hook();
 init_UnityAD_hook();
 extern  void init_Vungle_hook();

@@ -14,16 +14,22 @@
 }
 
 -(void)setup{
-NSMutableArray* returnArray=[NSMutableArray array];
-NSArray* AdBlockSubscriptionList=AdBlockSubscriptionListConst;
-	for(int i=0;i<[AdBlockSubscriptionList count];i++){
-		NSString* subList=[NSString stringWithContentsOfURL:[NSURL URLWithString:[AdBlockSubscriptionList objectAtIndex:i]] encoding:NSUTF8StringEncoding error:nil];
-		NSMutableArray* breakDownList=[NSMutableArray arrayWithArray:[subList componentsSeparatedByString:@"\n"]];
-		[returnArray addObjectsFromArray:breakDownList];
-		//Comments in the original file can safely be ignored
+NSMutableArray* LocalArray=[NSMutableArray arrayWithContentsOfFile:FiltListPath];
+dispatch_queue_t imageQueue = dispatch_queue_create("FilterUpdate",NULL);
+dispatch_async(imageQueue, ^{
+    NSMutableArray* returnArray=[NSMutableArray array];
+    NSArray* AdBlockSubscriptionList=AdBlockSubscriptionListConst;
+    for(int i=0;i<[AdBlockSubscriptionList count];i++){
+        NSString* subList=[NSString stringWithContentsOfURL:[NSURL URLWithString:[AdBlockSubscriptionList objectAtIndex:i]] encoding:NSUTF8StringEncoding error:nil];
+        NSMutableArray* breakDownList=[NSMutableArray arrayWithArray:[subList componentsSeparatedByString:@"\n"]];
+        [returnArray addObjectsFromArray:breakDownList];
+     }
+     [returnArray writeToFile:FiltListPath atomically:YES];
+        
+        
+}); 
 
-	}
-_filterList=returnArray;
+_filterList=LocalArray;
 }
 -(BOOL)checkURL:(NSString*)URL{
 NSArray* regularList=_filterList;

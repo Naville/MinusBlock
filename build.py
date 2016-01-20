@@ -133,5 +133,6 @@ os.system("cp ./MinusBlock.plist ./"+randomTweakName+".plist")
 os.system("make clean")
 os.system("make package")
 os.system("rm ./"+randomTweakName+".plist")
+os.system("rm ./Makefile")
 
 
