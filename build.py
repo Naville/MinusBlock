@@ -101,7 +101,8 @@ def subModuleList():
 	return returnString
 def id_generator(size=15, chars=string.ascii_uppercase + string.digits):
 	#Thanks to http://stackoverflow.com/questions/2257441/random-string-generation-with-upper-case-letters-and-digits-in-python
-	return ''.join(random.choice(chars) for _ in range(size))
+	ret=''.join(random.choice(chars) for _ in range(size))
+	return "1a"+ret
 randomTweakName=id_generator()#Generate Random Name To Help Bypass Detection
 #os.remove("./Makefile")
 toggleModule()
@@ -131,7 +132,7 @@ fileHandle.write(makeFileString)
 fileHandle.close() 
 os.system("cp ./MinusBlock.plist ./"+randomTweakName+".plist")
 os.system("make clean")
-os.system("make package")
+subprocess.check_call(['make','package'], stdout=devnull, stderr=subprocess.STDOUT)
 os.system("rm ./"+randomTweakName+".plist")
 os.system("rm ./Makefile")
 os.system("rm -rf ./_")

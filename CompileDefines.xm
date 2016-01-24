@@ -11,6 +11,8 @@ extern  void init_GoogleAdMob_hook();
 init_GoogleAdMob_hook();
 extern  void init_Heyzap_hook();
 init_Heyzap_hook();
+extern  void init_IAPCrazy_hook();
+init_IAPCrazy_hook();
 extern  void init_InMobi_hook();
 init_InMobi_hook();
 extern  void init_Limei_hook();

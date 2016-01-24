@@ -1,5 +1,10 @@
 #import "./Hooks/Utils.h"
+#import "./Hooks/SharedDefine.pch"
 #import <Foundation/Foundation.h>
+void InitForCallBack(const struct mach_header* mh, intptr_t vmaddr_slide){
+extern void GlobalInit();
+GlobalInit();	
+}
 %ctor{
 	NSString* Identifer=[[NSBundle mainBundle] bundleIdentifier];
 	if([Identifer hasPrefix:@"com.apple"]&&Identifer!=nil){
@@ -10,8 +15,8 @@
 	[Utility setup];
 	//Setup Filter List before Applying Hook
 	NSLog(@"Loading Minus Block");
-	extern void GlobalInit();
-	GlobalInit();
+	NSLog(@"Setting Up CallBacks");
+	_dyld_register_func_for_add_image(InitForCallBack);
 	}
 	else{
 		NSLog(@"Skipping Loading");

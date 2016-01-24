@@ -1,5 +1,10 @@
 #import "../SharedDefine.pch"
 %group InMobi
+%hook InMobi
++(void)initialize:(id)obj{
+	
+}
+%end
 %hook IMSdk
 + (void)initWithAccountID:(NSString *)accountID{
 

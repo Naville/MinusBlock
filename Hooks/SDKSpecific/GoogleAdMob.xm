@@ -6,6 +6,9 @@ typedef struct GADAdSize {
 %group GoogleAD
 
 %hook GADBannerView
+-(id)init{
+  return nil;
+}
 - (id)initWithAdSize:(GADAdSize)adSize{
 adSize.size=CGSizeMake(0,0);
 return %orig;
@@ -15,6 +18,9 @@ return %orig;
 }
 %end
 %hook GADInterstitial
+-(id)init{
+  return nil;
+}
 - (id)initWithAdUnitID:(NSString *)adUnitID{
 
 //No we don't simply return nil for stability's sake
