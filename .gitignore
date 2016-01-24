@@ -9,3 +9,5 @@ _/
 theos/
 .theos
 ./_/
+.theos/*
+.theos/
