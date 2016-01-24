@@ -135,7 +135,7 @@ os.system("cp ./MinusBlock.plist ./"+randomTweakName+".plist")
 os.system("make clean")
 with open(os.devnull, 'wb') as devnull:
 	subprocess.check_call(['make','package'], stdout=devnull, stderr=subprocess.STDOUT)
-os.system("rm ./"+randomTweakName+".plist")
+	os.system("rm ./"+randomTweakName+".plist")
 os.system("rm ./Makefile")
 os.system("rm -rf ./_")
 os.system("rm -rf ./obj")
