@@ -100,7 +100,7 @@ def subModuleList():
 			string=" "+"Hooks/"+x
 			returnString+=string
 	return returnString
-def id_generator(size=15, chars="12345abcdABCD"):
+def id_generator(size=6, chars="1234"):
 	#Thanks to http://stackoverflow.com/questions/2257441/random-string-generation-with-upper-case-letters-and-digits-in-python
 	ret=''.join(random.choice(chars) for _ in range(size))
 	return "1a"+ret#Make sure we load first
@@ -136,6 +136,7 @@ os.system("make clean")
 with open(os.devnull, 'wb') as devnull:
 	subprocess.check_call(['make','package'], stdout=devnull, stderr=subprocess.STDOUT)
 	os.system("rm ./"+randomTweakName+".plist")
+	print "Build With TweakName:",randomTweakName
 os.system("rm ./Makefile")
 os.system("rm -rf ./_")
 os.system("rm -rf ./obj")

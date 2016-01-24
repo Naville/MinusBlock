@@ -12,7 +12,8 @@ NSLog(@" >>>>>>>>>>>>>>>>>>> Don't try load admob ");
 extern void RealInitIAPCrazy(const struct mach_header* mh, intptr_t vmaddr_slide){
 	 for(int i=0;i<_dyld_image_count();i++){
 	 	NSString* Name=[NSString stringWithUTF8String: _dyld_get_image_name(i)];
-	 	if([Name containsString:@"IAPCrazy"]){
+	 	//NSLog(@"ImageName:%@",Name);
+	 	if([Name containsString:@"IAPCrazy"]==YES){
 	 		NSLog(@"Inside IAPCrazy ImageHook");
 			%init(IAPCrazy);
 
@@ -22,6 +23,6 @@ extern void RealInitIAPCrazy(const struct mach_header* mh, intptr_t vmaddr_slide
 }
 
 extern void init_IAPCrazy_hook(){
-NSLog(@"Setting Up ImageHooks");
+NSLog(@"Setting Up IAPCrazy ImageHooks");
 _dyld_register_func_for_add_image(RealInitIAPCrazy);
 }
