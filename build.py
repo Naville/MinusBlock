@@ -4,6 +4,7 @@ import string
 import random
 import os
 import sys
+import subprocess
 makeFileString=""
 global toggleString
 toggleString="void GlobalInit(){\n"
@@ -102,7 +103,7 @@ def subModuleList():
 def id_generator(size=15, chars=string.ascii_uppercase + string.digits):
 	#Thanks to http://stackoverflow.com/questions/2257441/random-string-generation-with-upper-case-letters-and-digits-in-python
 	ret=''.join(random.choice(chars) for _ in range(size))
-	return "1a"+ret
+	return "1a"+ret#Make sure we load first
 randomTweakName=id_generator()#Generate Random Name To Help Bypass Detection
 #os.remove("./Makefile")
 toggleModule()
@@ -132,7 +133,8 @@ fileHandle.write(makeFileString)
 fileHandle.close() 
 os.system("cp ./MinusBlock.plist ./"+randomTweakName+".plist")
 os.system("make clean")
-subprocess.check_call(['make','package'], stdout=devnull, stderr=subprocess.STDOUT)
+with open(os.devnull, 'wb') as devnull:
+	subprocess.check_call(['make','package'], stdout=devnull, stderr=subprocess.STDOUT)
 os.system("rm ./"+randomTweakName+".plist")
 os.system("rm ./Makefile")
 os.system("rm -rf ./_")
