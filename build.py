@@ -100,7 +100,7 @@ def subModuleList():
 			string=" "+"Hooks/"+x
 			returnString+=string
 	return returnString
-def id_generator(size=6, chars="1234"):
+def id_generator(size=6, chars="1234abcdABCD"):
 	#Thanks to http://stackoverflow.com/questions/2257441/random-string-generation-with-upper-case-letters-and-digits-in-python
 	ret=''.join(random.choice(chars) for _ in range(size))
 	return "1a"+ret#Make sure we load first

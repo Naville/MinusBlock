@@ -1,5 +1,10 @@
 #import "../SharedDefine.pch"
 %group InMobi
+%hook IMInterstitial
+-(id)initWithAppId:(id)obj{
+return nil;
+}
+%end
 %hook InMobi
 +(void)initialize:(id)obj{
 	

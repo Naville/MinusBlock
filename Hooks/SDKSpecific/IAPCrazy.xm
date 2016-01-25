@@ -99,11 +99,20 @@
 }
 %end
 %hook ICZUtil
++ (id)sharedInstance{
+	return nil;
+}
 -(void)loadadcontnet{
 NSLog(FrogLog);
 }
 -(void)loadAdmobInterstital{
 NSLog(FrogLog);
+}
+- (void)interstitialDidReceiveAd:(id)arg1{
+
+}
+- (void)fullAdClicked{
+
 }
 %end
 %end
