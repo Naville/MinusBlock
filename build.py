@@ -7,7 +7,7 @@ import sys
 import subprocess
 makeFileString=""
 global toggleString
-toggleString="ANY CHANGE IN THIS FILE WILL BE OVERWERITTEN!!\nvoid GlobalInit(){\n"
+toggleString="//ANY CHANGE IN THIS FILE WILL BE OVERWERITTEN!!\nvoid GlobalInit(){\n"
 def toggleModule():
 	SDKFileList=listdir("./Hooks/SDKSpecific/")
 	for x in SDKFileList:
