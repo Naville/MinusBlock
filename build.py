@@ -139,7 +139,7 @@ if(len(sys.argv)>1):
 		print "Cleaning Old Build"
 		os.system("make clean")
 		print "Building"
-		os.system("make")
+		os.system("make package")
 		os.system("rm ./"+randomTweakName+".plist")
 else:
 	with open(os.devnull, 'wb') as devnull:
@@ -147,7 +147,7 @@ else:
 			print "Cleaning Old Build"
 			subprocess.check_call(['make','clean'], stdout=devnull, stderr=subprocess.STDOUT)
 			print "Building"
-			x=subprocess.check_call(['make'], stdout=devnull, stderr=subprocess.STDOUT)
+			x=subprocess.check_call(['make','package'], stdout=devnull, stderr=subprocess.STDOUT)
 			print "Make Exit With Status:",x
 			os.system("rm ./"+randomTweakName+".plist")
 		except:
