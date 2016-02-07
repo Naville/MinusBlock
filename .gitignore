@@ -11,3 +11,4 @@ theos/
 ./_/
 .theos/*
 .theos/
+CompileDefines.xm

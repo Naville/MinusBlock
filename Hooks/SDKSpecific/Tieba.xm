@@ -54,5 +54,7 @@ return nil;
 %end
 
 extern void init_Tieba_hook(){
+if(objc_getClass("TBCPromotionCell")!=NULL){
 %init(Tieba)
+}
 }

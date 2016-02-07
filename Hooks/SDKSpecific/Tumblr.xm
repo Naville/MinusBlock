@@ -32,5 +32,7 @@
 
 %end
 extern void init_Tumblr_hook(){
+if(objc_getClass("TMAdvertisement")!=NULL){
 %init(Tumblr);
+}
 }

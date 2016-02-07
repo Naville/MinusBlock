@@ -7,7 +7,7 @@ import sys
 import subprocess
 makeFileString=""
 global toggleString
-toggleString="void GlobalInit(){\n"
+toggleString="ANY CHANGE IN THIS FILE WILL BE OVERWERITTEN!!\nvoid GlobalInit(){\n"
 def toggleModule():
 	SDKFileList=listdir("./Hooks/SDKSpecific/")
 	for x in SDKFileList:
@@ -103,7 +103,7 @@ def subModuleList():
 def id_generator(size=6, chars="1234abcdABCD"):
 	#Thanks to http://stackoverflow.com/questions/2257441/random-string-generation-with-upper-case-letters-and-digits-in-python
 	ret=''.join(random.choice(chars) for _ in range(size))
-	return "1a"+ret#Make sure we load first
+	return '1a'+ret#Make sure we load first
 randomTweakName=id_generator()#Generate Random Name To Help Bypass Detection
 #os.remove("./Makefile")
 toggleModule()
@@ -133,12 +133,25 @@ fileHandle.write(makeFileString)
 fileHandle.close() 
 os.system("cp ./MinusBlock.plist ./"+randomTweakName+".plist")
 os.system("make clean")
-with open(os.devnull, 'wb') as devnull:
-	subprocess.check_call(['make','package'], stdout=devnull, stderr=subprocess.STDOUT)
-	os.system("rm ./"+randomTweakName+".plist")
-	print "Build With TweakName:",randomTweakName
-os.system("rm ./Makefile")
-os.system("rm -rf ./_")
-os.system("rm -rf ./obj")
-
+if(len(sys.argv)>1):
+	if(sys.argv[1].upper() =="DEBUG"):
+		print "Debugging Mode"
+		print "Cleaning Old Build"
+		os.system("make clean")
+		print "Building"
+		os.system("make")
+		os.system("rm ./"+randomTweakName+".plist")
+else:
+	with open(os.devnull, 'wb') as devnull:
+		try:
+			print "Cleaning Old Build"
+			subprocess.check_call(['make','clean'], stdout=devnull, stderr=subprocess.STDOUT)
+			print "Building"
+			x=subprocess.check_call(['make'], stdout=devnull, stderr=subprocess.STDOUT)
+			print "Make Exit With Status:",x
+			os.system("rm ./"+randomTweakName+".plist")
+		except:
+			os.system("rm ./"+randomTweakName+".plist")
+			print "Error During Compile,Rerun With DEBUG as Argument to See Output"
+			exit(255)
 

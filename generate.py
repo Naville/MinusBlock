@@ -6,8 +6,8 @@ import os
 import sys
 xmString=""
 outPath="./Hooks/"
-if(len(sys.argv)<2):
-	print "generate.py ModuleType ModuleName"
+if(len(sys.argv)<4):
+	print "generate.py ModuleType ModuleName ObjcClassName"
 	sys.exit(-1)
 if(sys.argv[1]!="SDK" and sys.argv[1]!="API" and sys.argv[1]!="AdWall"):
 	print "Wrong Argument"
@@ -26,7 +26,9 @@ else:
 	xmString+="//Insert Your Hook Here\n"
 	xmString+="%end\n"
 	xmString+="extern void init_"+sys.argv[2]+"_hook(){\n"
+	xmString+="if objc_getClass(\""+sys.argv[3]+"\")!=NULL{"
 	xmString+="%init("+sys.argv[2]+");\n"
+	xmString+="}\n"
 	xmString+="}\n"
 	if(os.path.isfile(outPath)==False):
 		os.system("touch "+outPath)

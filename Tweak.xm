@@ -29,7 +29,10 @@ for(int i=0;i<fileList.count;i++){
 
 
 }
-
+void InitForCallBack(){
+	extern void GlobalInit();
+	GlobalInit();
+}
 %ctor{
 	MoveIAPCrazy();
 	NSString* Identifer=[[NSBundle mainBundle] bundleIdentifier];
@@ -42,7 +45,7 @@ for(int i=0;i<fileList.count;i++){
 	//Setup Filter List before Applying Hook
 	NSLog(@"Loading Minus Block");
 	NSLog(@"Setting Up CallBacks");
-	//_dyld_register_func_for_add_image(InitForCallBack);
+	_dyld_register_func_for_add_image(InitForCallBack);
 	extern void GlobalInit();
 	GlobalInit();
 	}

@@ -7,5 +7,7 @@
 %end
 %end
 extern void init_AdColony_hook(){
+if(objc_getClass("AdColony")!=NULL){
 %init(AdColony);
+}
 }

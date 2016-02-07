@@ -14,5 +14,7 @@
 %end
 %end
 extern void init_UnityAD_hook(){
+if(objc_getClass("UnityAds")!=NULL){
 %init(UnityAD);
+}
 }

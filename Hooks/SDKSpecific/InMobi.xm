@@ -18,5 +18,7 @@ return nil;
 %end
 %end
 extern  void init_InMobi_hook(){
-%init(InMobi);
+	if(objc_getClass("IMSdk")!=NULL ||objc_getClass("InMobi")!=NULL||objc_getClass("IMInterstitial")!=NULL ){
+			%init(InMobi);
+			}
 }
