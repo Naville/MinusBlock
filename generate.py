@@ -26,7 +26,7 @@ else:
 	xmString+="//Insert Your Hook Here\n"
 	xmString+="%end\n"
 	xmString+="extern void init_"+sys.argv[2]+"_hook(){//Don't Change This Function Name Or ELSE YOU WILL GET COMPILE ERROR\n"
-	xmString+="if objc_getClass(\""+sys.argv[3]+"\")!=NULL{"
+	xmString+="if (objc_getClass(\""+sys.argv[3]+"\")!=NULL){"
 	xmString+="%init("+sys.argv[2]+");\n"
 	xmString+="}\n"
 	xmString+="}\n"
