@@ -5,6 +5,8 @@
 @end
 @interface TBCFrsCell : UITableViewCell
 @end
+@interface TBCFrsActivitiesCell : UIImageView
+@end
 %group Tieba
 
 %hook TBCFrsCell
@@ -14,8 +16,8 @@
 		id TBCUI=MSHookIvar<id>(arg1,"_authorInfo");//TBCUserItem
 		NSString* userName=MSHookIvar<NSString*>(TBCUI,"_uNameShow");
 		if([TiebaFilterList containsObject:userName]){
-			UITableViewCell* Current=self;
-			[Current setHidden:YES];
+			[self setHidden:YES];
+			[self removeFromSuperview];
 
 		}
 	}
@@ -37,8 +39,24 @@
 + (double)tableView:(id)arg1 rowHeightForObject:(id)arg2{
 	return 0;
 }
-//- (void)setObject:(id)arg1{}
-//- (void)setupActivityView{}
+- (void)setupActivityView{
+	UILabel* A=MSHookIvar<UILabel*>(self,"_activitiesLabel");
+	UIImageView* B=MSHookIvar<UIImageView*>(self,"_activitiesIcon");
+	UIImageView* C=MSHookIvar<UIImageView*>(self,"_arrow");
+	[A setHidden:YES];
+	[B setHidden:YES];
+	[C setHidden:YES];
+	[self setHidden:YES];
+}
+- (void)setObject:(id)arg1{
+	UILabel* A=MSHookIvar<UILabel*>(self,"_activitiesLabel");
+	UIImageView* B=MSHookIvar<UIImageView*>(self,"_activitiesIcon");
+	UIImageView* C=MSHookIvar<UIImageView*>(self,"_arrow");
+	[A setHidden:YES];
+	[B setHidden:YES];
+	[C setHidden:YES];
+	[self setHidden:YES];
+}
 %end
 %hook TBCPBCell
 - (void)reloadInnerFloor{
@@ -85,9 +103,6 @@
 }
 %end
 %hook BannerMgr
-+ (id)sharedMgr{
-	return nil;
-}
 - (id)getBannerList:(int)arg1{return nil;}
 - (id)getInfoByIndex:(int)arg1{return nil;}
 - (int)getInfoListCount{return 0;}
@@ -127,28 +142,17 @@
 	%orig;
 	MSHookIvar<NSArray*>(self,"_banners")=[NSArray array];
 }
-- (id)init{
-	id ret=%orig;
-	MSHookIvar<NSArray*>(ret,"_banners")=[NSArray array];
-	return ret;
-}
 %end
 %hook TBC2048ViewController
 -(void)downloadAppFromAppStore{
 }
 %end
 %hook TBC2048PromotionView
-- (id)initWithFrame:(void*)arg1{
-return nil;
-}
 -(void)downloadAppFromAppStore{
-	[self dealloc];
 }
 - (void)bindData{
-	[self dealloc];
 }
 - (void)setupUI{
-	[self dealloc];
 }
 %end
 %hook TBCPromotionCell
@@ -165,6 +169,11 @@ return nil;
 
 }
 %end
+%hook TBCFrsBannerItem
+-(id)init{
+	return nil;
+}
+%end
 %hook TBCPromotionGoodsItem
 -(id)init{
 	return nil;
@@ -175,6 +184,7 @@ return nil;
 	return nil;
 }
 %end
+
 
 %hook TBCFrsViewController
 - (id)getPromotionCell{return nil;}
