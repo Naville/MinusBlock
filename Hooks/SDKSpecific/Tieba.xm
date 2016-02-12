@@ -3,14 +3,60 @@
 #import <UIKit/UIKit.h>
 @interface TBCPBCell : UITableViewCell
 @end
+@interface TBCFrsCell : UITableViewCell
+@end
 %group Tieba
+
+%hook TBCFrsCell
+- (void)setObject:(id)arg1{
+
+	if([NSStringFromClass([arg1 class]) isEqualToString:@"TBCFrsDataItem"]){
+		id TBCUI=MSHookIvar<id>(arg1,"_authorInfo");//TBCUserItem
+		NSString* userName=MSHookIvar<NSString*>(TBCUI,"_uNameShow");
+		if([TiebaFilterList containsObject:userName]){
+			UITableViewCell* Current=self;
+			[Current setHidden:YES];
+
+		}
+	}
+	%orig;
+}
+%end
+
+/*
+%hook TBCFrsActivityCell
++ (double)tableView:(id)arg1 rowHeightForObject:(id)arg2{
+	return 0;
+}
+- (void)setObject:(id)arg1{}
+- (void)setupActivityView{}
+
+%end
+*/
+%hook TBCFrsActivitiesCell
++ (double)tableView:(id)arg1 rowHeightForObject:(id)arg2{
+	return 0;
+}
+//- (void)setObject:(id)arg1{}
+//- (void)setupActivityView{}
+%end
 %hook TBCPBCell
 - (void)reloadInnerFloor{
 	id A=MSHookIvar<id>(self,"_topCellView");
 	NSString* userName=MSHookIvar<UILabel*>(A,"_nameLable").text;
 	if([TiebaFilterList containsObject:userName]){
-		UITableViewCell* Current=self;
-		[Current setHidden:YES];
+		//UITableViewCell* Current=self;
+		//[Current setHidden:YES];
+		id X=MSHookIvar<id>(self,"_pbRichTextView");
+		id TBRichText=MSHookIvar<id>(X,"_richTextVO");
+		MSHookIvar<NSMutableAttributedString *>(TBRichText,"_attributedString")=[[NSMutableAttributedString alloc] initWithString:TiebaBlockNote];  
+		MSHookIvar<NSMutableArray *>(TBRichText,"iImageArray")=[NSMutableArray array];
+		MSHookIvar<NSMutableArray *>(TBRichText,"iEmojiArray")=[NSMutableArray array];
+		MSHookIvar<NSMutableArray *>(TBRichText,"iVedioArray")=[NSMutableArray array];
+		MSHookIvar<NSMutableArray *>(TBRichText,"_iVoiceArray")=[NSMutableArray array];
+		MSHookIvar<NSMutableArray *>(TBRichText,"_xiaoYingArray")=[NSMutableArray array];
+		MSHookIvar<NSString *>(TBRichText,"shareText")=@"Blocked By MinusBlock";
+		MSHookIvar<NSString *>(TBRichText,"richTextCopyString")=[NSMutableString stringWithString:TiebaBlockNote];
 	}
 	%orig;
 }
@@ -26,14 +72,14 @@
 	if([TiebaFilterList containsObject:userName]){
 	MSHookIvar<NSArray*>(arg1,"_contentArray")=[NSArray array];
 	id TBRichText=MSHookIvar<id>(arg1,"_iRichTextVO");
-	MSHookIvar<NSMutableAttributedString *>(TBRichText,"_attributedString")=[[NSMutableAttributedString alloc] initWithString:@"Blocked"];  
+	MSHookIvar<NSMutableAttributedString *>(TBRichText,"_attributedString")=[[NSMutableAttributedString alloc] initWithString:TiebaBlockNote];  
 	MSHookIvar<NSMutableArray *>(TBRichText,"iImageArray")=[NSMutableArray array];
 	MSHookIvar<NSMutableArray *>(TBRichText,"iEmojiArray")=[NSMutableArray array];
 	MSHookIvar<NSMutableArray *>(TBRichText,"iVedioArray")=[NSMutableArray array];
 	MSHookIvar<NSMutableArray *>(TBRichText,"_iVoiceArray")=[NSMutableArray array];
 	MSHookIvar<NSMutableArray *>(TBRichText,"_xiaoYingArray")=[NSMutableArray array];
-	MSHookIvar<NSString *>(TBRichText,"shareText")=@"Blocked";
-	MSHookIvar<NSString *>(TBRichText,"richTextCopyString")=[NSMutableString stringWithString:@"Blocked"];
+	MSHookIvar<NSString *>(TBRichText,"shareText")=@"Blocked By MinusBlock";
+	MSHookIvar<NSString *>(TBRichText,"richTextCopyString")=[NSMutableString stringWithString:TiebaBlockNote];
 	}
 	%orig;
 }
