@@ -52,9 +52,17 @@ return %orig(GADadUnitID);
 %end
 
 %end
+extern void RealInitGAD(const struct mach_header* mh, intptr_t vmaddr_slide){
+  if(objc_getClass("GADInterstitial")!=nil){//Just Incase
+      NSLog(@"Init GoogleAD ImageHook");
+      %init(GoogleAD);
 
+    }
+
+}
 extern  void init_GoogleAdMob_hook(){
-        %init(GoogleAD);
+NSLog(@"Setting Up GoogleAD ImageHooks");
+_dyld_register_func_for_add_image(RealInitGAD);
 }
 
 

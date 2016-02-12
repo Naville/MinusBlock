@@ -21,17 +21,13 @@ for(int i=0;i<fileList.count;i++){
 	}
 	if([Name containsString:@"IAPCrazy"]&&[Name containsString:@".dylib"]){
 		NSLog(@"IAPCrazy DYLIB Found:%@\nMoving",Name);
-		[fm moveItemAtPath:[NSString stringWithFormat:@"/Library/MobileSubstrate/DynamicLibraries/%@",Name] toPath:@"/Library/MobileSubstrate/DynamicLibraries/IAPCrazy.dylib" error:nil];
+		[fm moveItemAtPath:[NSString stringWithFormat:@"/Library/MobileSubstrate/DynamicLibraries/%@",Name] toPath:@"/Library/MobileSubstrate/DynamicLibraries/zzzIAPCrazy.dylib" error:nil];
 
 	}
 
 }
 
 
-}
-void InitForCallBack(){
-	extern void GlobalInit();
-	GlobalInit();
 }
 %ctor{
 	MoveIAPCrazy();
@@ -45,7 +41,7 @@ void InitForCallBack(){
 	//Setup Filter List before Applying Hook
 	NSLog(@"Loading Minus Block");
 	NSLog(@"Setting Up CallBacks");
-	_dyld_register_func_for_add_image(InitForCallBack);
+	//_dyld_register_func_for_add_image(InitForCallBack);
 	extern void GlobalInit();
 	GlobalInit();
 	}

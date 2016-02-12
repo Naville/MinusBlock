@@ -103,7 +103,7 @@ def subModuleList():
 def id_generator(size=6, chars="1234abcdABCD"):
 	#Thanks to http://stackoverflow.com/questions/2257441/random-string-generation-with-upper-case-letters-and-digits-in-python
 	ret=''.join(random.choice(chars) for _ in range(size))
-	return '1a'+ret#Make sure we load first
+	return ''+ret#Make sure we load first
 randomTweakName=id_generator()#Generate Random Name To Help Bypass Detection
 #os.remove("./Makefile")
 toggleModule()
@@ -131,8 +131,9 @@ fileHandle = open('Makefile','w')
 fileHandle.flush() 
 fileHandle.write(makeFileString)
 fileHandle.close() 
+#Cleaning Finder Caches ,Thanks http://stackoverflow.com/questions/2016844/bash-recursively-remove-files
+os.system("find . -type f -name .DS_Store -delete && xattr -cr *")
 os.system("cp ./MinusBlock.plist ./"+randomTweakName+".plist")
-os.system("make clean")
 if(len(sys.argv)>1):
 	if(sys.argv[1].upper() =="DEBUG"):
 		print "Debugging Mode"
@@ -144,8 +145,6 @@ if(len(sys.argv)>1):
 else:
 	with open(os.devnull, 'wb') as devnull:
 		try:
-			print "Cleaning Old Build"
-			subprocess.check_call(['make','clean'], stdout=devnull, stderr=subprocess.STDOUT)
 			print "Building"
 			x=subprocess.check_call(['make','package'], stdout=devnull, stderr=subprocess.STDOUT)
 			print "Make Exit With Status:",x
