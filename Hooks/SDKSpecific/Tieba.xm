@@ -8,7 +8,19 @@
 @interface TBCFrsActivitiesCell : UIImageView
 @end
 %group Tieba
-
+#if 1
+%hook TBCMTStatusBarDisplayer
+- (void)showStatusBarMessage:(id)arg1 type:(int)arg2{
+	
+}
+- (void)onNewMessage{
+	
+}
+- (void)onNewReplyAtMessage:(id)arg1{
+	
+}
+%end
+#endif
 %hook TBCFrsCell
 - (void)setObject:(id)arg1{
 

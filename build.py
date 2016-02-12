@@ -142,15 +142,18 @@ if(len(sys.argv)>1):
 		print "Building"
 		os.system("make package")
 		os.system("rm ./"+randomTweakName+".plist")
+		os.system("rm ./CompileDefines.xm")
 else:
 	with open(os.devnull, 'wb') as devnull:
 		try:
 			print "Building"
 			x=subprocess.check_call(['make','package'], stdout=devnull, stderr=subprocess.STDOUT)
 			print "Make Exit With Status:",x
+			os.system("rm ./CompileDefines.xm")
 			os.system("rm ./"+randomTweakName+".plist")
 		except:
 			os.system("rm ./"+randomTweakName+".plist")
+			os.system("rm ./CompileDefines.xm")
 			print "Error During Compile,Rerun With DEBUG as Argument to See Output"
 			exit(255)
 
