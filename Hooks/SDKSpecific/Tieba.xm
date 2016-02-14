@@ -7,6 +7,8 @@
 @end
 @interface TBCFrsActivitiesCell : UIImageView
 @end
+@interface TBCFloorContentView:UIView
+@end
 %group Tieba
 
 #if 1
@@ -81,19 +83,20 @@
 %end
 %hook TBCPBCell
 - (void)reloadInnerFloor{
+	NSLog(@"reloadInnerFloor");
 	id A=MSHookIvar<id>(self,"_topCellView");
 	NSString* userName=MSHookIvar<UILabel*>(A,"_nameLable").text;
 	if([TiebaFilterList containsObject:userName]&& userName!=nil){
-		UITableViewCell* Current=self;
-		[Current setHidden:YES];
+		[self setHidden:YES];
 		[MSHookIvar<UIView*>(self,"_pbRichTextView") setHidden:YES];
 		[MSHookIvar<UIView*>(self,"_pbRichTextView") removeFromSuperview];
-		[Current removeFromSuperview];
+		[self removeFromSuperview];
 
 	}
 	else{
 		%orig;
 	}
+	NSLog(@"reloadInnerFloor END");
 }
 %end
 
@@ -101,22 +104,19 @@
 
 %hook TBCFloorContentView
 - (void)setFloorCellData:(id)arg1{//arg1 TBCFloorItem
-
+	NSLog(@"setFloorCellData:");
 	id TBCUI=MSHookIvar<id>(arg1,"_authorInfo");//TBCUserItem
 	NSString* userName=MSHookIvar<NSString*>(TBCUI,"_uNameShow");
 	if([TiebaFilterList containsObject:userName]){
 	MSHookIvar<NSArray*>(arg1,"_contentArray")=[NSArray array];
-	id TBRichText=MSHookIvar<id>(arg1,"_iRichTextVO");
-	MSHookIvar<NSMutableAttributedString *>(TBRichText,"_attributedString")=[[NSMutableAttributedString alloc] initWithString:TiebaBlockNote];  
-	MSHookIvar<NSMutableArray *>(TBRichText,"iImageArray")=[NSMutableArray array];
-	MSHookIvar<NSMutableArray *>(TBRichText,"iEmojiArray")=[NSMutableArray array];
-	MSHookIvar<NSMutableArray *>(TBRichText,"iVedioArray")=[NSMutableArray array];
-	MSHookIvar<NSMutableArray *>(TBRichText,"_iVoiceArray")=[NSMutableArray array];
-	MSHookIvar<NSMutableArray *>(TBRichText,"_xiaoYingArray")=[NSMutableArray array];
-	MSHookIvar<NSString *>(TBRichText,"shareText")=@"Blocked By MinusBlock";
-	MSHookIvar<NSString *>(TBRichText,"richTextCopyString")=[NSMutableString stringWithString:TiebaBlockNote];
+	[self setHidden:YES];
+	[self removeFromSuperview];
+
 	}
+	else{
 	%orig(arg1);
+		}
+	NSLog(@"setFloorCellData: Done");
 }
 %end
 %hook BannerMgr
