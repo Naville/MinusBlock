@@ -89,15 +89,6 @@
 		[MSHookIvar<UIView*>(self,"_pbRichTextView") setHidden:YES];
 		[MSHookIvar<UIView*>(self,"_pbRichTextView") removeFromSuperview];
 		[Current removeFromSuperview];
-		id TBRichText=MSHookIvar<id>(X,"_richTextVO");
-		MSHookIvar<NSMutableAttributedString *>(TBRichText,"_attributedString")=[[NSMutableAttributedString alloc] initWithString:TiebaBlockNote];  
-		MSHookIvar<NSMutableArray *>(TBRichText,"iImageArray")=[NSMutableArray array];
-		MSHookIvar<NSMutableArray *>(TBRichText,"iEmojiArray")=[NSMutableArray array];
-		MSHookIvar<NSMutableArray *>(TBRichText,"iVedioArray")=[NSMutableArray array];
-		MSHookIvar<NSMutableArray *>(TBRichText,"_iVoiceArray")=[NSMutableArray array];
-		MSHookIvar<NSMutableArray *>(TBRichText,"_xiaoYingArray")=[NSMutableArray array];
-		MSHookIvar<NSString *>(TBRichText,"shareText")=@"Blocked By MinusBlock";
-		MSHookIvar<NSString *>(TBRichText,"richTextCopyString")=[NSMutableString stringWithString:TiebaBlockNote];
 
 	}
 	else{
