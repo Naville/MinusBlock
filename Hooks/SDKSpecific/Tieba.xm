@@ -8,6 +8,7 @@
 @interface TBCFrsActivitiesCell : UIImageView
 @end
 %group Tieba
+
 #if 1
 %hook TBCMTStatusBarDisplayer
 - (void)showStatusBarMessage:(id)arg1 type:(int)arg2{
@@ -56,28 +57,38 @@
 	UIImageView* B=MSHookIvar<UIImageView*>(self,"_activitiesIcon");
 	UIImageView* C=MSHookIvar<UIImageView*>(self,"_arrow");
 	[A setHidden:YES];
+	[A removeFromSuperview];
 	[B setHidden:YES];
+	[B removeFromSuperview];
 	[C setHidden:YES];
+	[C removeFromSuperview];
 	[self setHidden:YES];
+	[self removeFromSuperview];
 }
 - (void)setObject:(id)arg1{
 	UILabel* A=MSHookIvar<UILabel*>(self,"_activitiesLabel");
 	UIImageView* B=MSHookIvar<UIImageView*>(self,"_activitiesIcon");
 	UIImageView* C=MSHookIvar<UIImageView*>(self,"_arrow");
 	[A setHidden:YES];
+	[A removeFromSuperview];
 	[B setHidden:YES];
+	[B removeFromSuperview];
 	[C setHidden:YES];
+	[C removeFromSuperview];
 	[self setHidden:YES];
+	[self removeFromSuperview];
 }
 %end
 %hook TBCPBCell
 - (void)reloadInnerFloor{
 	id A=MSHookIvar<id>(self,"_topCellView");
 	NSString* userName=MSHookIvar<UILabel*>(A,"_nameLable").text;
-	if([TiebaFilterList containsObject:userName]){
-		//UITableViewCell* Current=self;
-		//[Current setHidden:YES];
-		id X=MSHookIvar<id>(self,"_pbRichTextView");
+	if([TiebaFilterList containsObject:userName]&& userName!=nil){
+		UITableViewCell* Current=self;
+		[Current setHidden:YES];
+		[MSHookIvar<UIView*>(self,"_pbRichTextView") setHidden:YES];
+		[MSHookIvar<UIView*>(self,"_pbRichTextView") removeFromSuperview];
+		[Current removeFromSuperview];
 		id TBRichText=MSHookIvar<id>(X,"_richTextVO");
 		MSHookIvar<NSMutableAttributedString *>(TBRichText,"_attributedString")=[[NSMutableAttributedString alloc] initWithString:TiebaBlockNote];  
 		MSHookIvar<NSMutableArray *>(TBRichText,"iImageArray")=[NSMutableArray array];
@@ -87,8 +98,11 @@
 		MSHookIvar<NSMutableArray *>(TBRichText,"_xiaoYingArray")=[NSMutableArray array];
 		MSHookIvar<NSString *>(TBRichText,"shareText")=@"Blocked By MinusBlock";
 		MSHookIvar<NSString *>(TBRichText,"richTextCopyString")=[NSMutableString stringWithString:TiebaBlockNote];
+
 	}
-	%orig;
+	else{
+		%orig;
+	}
 }
 %end
 
@@ -111,7 +125,7 @@
 	MSHookIvar<NSString *>(TBRichText,"shareText")=@"Blocked By MinusBlock";
 	MSHookIvar<NSString *>(TBRichText,"richTextCopyString")=[NSMutableString stringWithString:TiebaBlockNote];
 	}
-	%orig;
+	%orig(arg1);
 }
 %end
 %hook BannerMgr
