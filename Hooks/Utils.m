@@ -2,6 +2,8 @@
 #import "./SharedDefine.pch"
 @implementation Utils : NSObject
 @synthesize filterList = _filterList;
+@synthesize TiebaBlockedList = _TiebaBlockedList;
+@synthesize TiebaRoughBlockList = _TiebaRoughBlockList;
 +(id)sharedManager{
  	static Utils *sharedUtils = nil;
     static dispatch_once_t onceToken;
@@ -12,13 +14,27 @@
 
 
 }
+-(BOOL)TiebaShouldBlock:(NSString*)userName{
+for(int i=0;i<_TiebaBlockedList.count;i++){
+    if([[_TiebaBlockedList objectAtIndex:i] isEqualToString:userName]){
+        return YES;
+    }
+}
+for(int j=0;j<_TiebaRoughBlockList.count;j++){
+    if([userName containsString:[_TiebaRoughBlockList objectAtIndex:j]]){
+        return YES;
+    }
 
+}
+return NO;
+}
 -(void)setup{
+_TiebaBlockedList=TiebaFilterList;
 NSMutableArray* LocalArray=[NSMutableArray arrayWithContentsOfFile:FiltListPath];
 NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 [dateFormatter setDateFormat:@"EEEE"];
 NSString *stringDate = [dateFormatter stringFromDate:[NSDate date]];
-if(![stringDate isEqualToString:@"Monday"]){
+if(![stringDate isEqualToString:@"Monday"] && [[NSFileManager defaultManager] fileExistsAtPath:FiltListPath]){
 
 
 }

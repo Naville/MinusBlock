@@ -7,5 +7,6 @@
 #define AdURL @"http://127.0.0.1"
 #define AdBlockSubscriptionListConst [NSArray arrayWithObjects:@"https://easylist-downloads.adblockplus.org/easylist.txt",@"https://easylist-downloads.adblockplus.org/adwarefilters.txt",@"https://easylist-downloads.adblockplus.org/easylistchina.txt",nil]
 #define FiltListPath @"/var/mobile/Library/Preferences/naville.minusblockFilter.plist"
-#define TiebaFilterList @[@"战无不胜小樱花",@"aom_皇亲酱",@"无聊帝v5",@"无聊帝v6",@"无聊帝v7",@"无聊帝v8",@"无聊帝v9",@"小葵控",@"贴吧触点推广",@"贴吧活动总管",@"贴吧活动大管家",@"黑丝伪娘诱惑",@"CyLw0330",@"只为从前",@"巫师科比",@"xingzhongxing",@"黑樱干翻akb",@"我李书林"]
+#define TiebaFilterList @[@"战无不胜小樱花",@"aom_皇亲酱",@"小葵控",@"贴吧触点推广",@"贴吧活动总管",@"贴吧活动大管家",@"黑丝伪娘诱惑",@"CyLw0330",@"只为从前",@"巫师科比",@"xingzhongxing",@"黑樱干翻akb",@"我李书林",@"dggghgv",@"AKB0048高桥南2",@"我酱我玉最高",@"椰奶酥卷",@"曾艳芬么么哒",@"风恋着雷",@"110255199"]
+#define TiebaRoughFilterList @[@"snh48吧外交",@"无聊帝"]
 #define TiebaBlockNote @"我妈死了,昨天刚火化,谢谢大家关心"
