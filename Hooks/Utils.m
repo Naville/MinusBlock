@@ -15,21 +15,23 @@
 
 }
 -(BOOL)TiebaShouldBlock:(NSString*)userName{
-for(int i=0;i<_TiebaBlockedList.count;i++){
-    if([[_TiebaBlockedList objectAtIndex:i] isEqualToString:userName]){
+for(id obj1 in _TiebaBlockedList){
+    if([obj1 isEqualToString:userName]){
         return YES;
     }
 }
-for(int j=0;j<_TiebaRoughBlockList.count;j++){
-    if([userName containsString:[_TiebaRoughBlockList objectAtIndex:j]]){
+for(id obj2 in _TiebaRoughBlockList){
+    if([userName containsString:obj2]){
         return YES;
     }
+    //NSLog(@"Utils:%@",userName);
 
 }
 return NO;
 }
 -(void)setup{
 _TiebaBlockedList=TiebaFilterList;
+_TiebaRoughBlockList=TiebaRoughFilterList;
 NSMutableArray* LocalArray=[NSMutableArray arrayWithContentsOfFile:FiltListPath];
 NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 [dateFormatter setDateFormat:@"EEEE"];

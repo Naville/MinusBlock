@@ -75,7 +75,7 @@
 @end
 %group Tieba
 %hook TBCFrsDataListItem
--(NSArray*)threadList{
+-(NSMutableArray*)threadList{
 	NSMutableArray* ret=[%orig mutableCopy];
 	for(int i=0;i<ret.count;i++){
 		TBCFrsDataItem* tmp=[ret objectAtIndex:i];
@@ -84,12 +84,12 @@
 #ifdef LOG
 			NSLog(@"TBCFrsDataListItemBlocked:%@",PosterName);
 #endif
-			[ret removeObjectAtIndex:i];
-			i=i+1;
+			[ret removeObject:tmp];
 
 		}else{
-
-			//NSLog(@"threadListPosterName:%@",PosterName);
+#ifdef LOG
+			NSLog(@"TBCFrsDataListItemPosterName:%@----%@",PosterName,tmp.authorInfo.uName);
+#endif
 		}
 
 	}
@@ -109,17 +109,17 @@
 			NSLog(@"TBCFloorListItemBlocked:%@",PosterName);
 #endif
 			[ret removeObject:tmp];
-			[tmp.iRichTextVO.attributedString.mutableString setString:TiebaBlockNote];
+			/*[tmp.iRichTextVO.attributedString.mutableString setString:TiebaBlockNote];
 			tmp.iRichTextVO.shareText=TiebaBlockNote;
 			tmp.iRichTextVO.richTextCopyString=[NSMutableString stringWithString:TiebaBlockNote];
 			tmp.iRichTextVO.iVedioArray=[NSMutableArray array];
 			tmp.iRichTextVO.iEmojiArray=[NSMutableArray array];
 			tmp.iRichTextVO.iImageArray=[NSMutableArray array];
-			tmp.contentArray=[NSArray array];
-			tmp.iFloorId=@"";
+			tmp.contentArray=[NSArray array];*/
 		}else{
-
-			//NSLog(@"TBCFloorListItem:PosterName:%@",PosterName);
+#ifdef LOG
+			NSLog(@"TBCFloorListItem:PosterName:%@",PosterName);
+#endif
 		}
 
 	}
@@ -139,8 +139,7 @@
 			NSString* replyAuthName=T.authorInfo.uNameShow;
 			if([TiebaFilterList containsObject:replyAuthName]){
 				NSLog(@"ReplyBlocked:%@",replyAuthName);
-				[tmp.replyFloorArray removeObjectAtIndex:j];
-				j++;
+				[tmp.replyFloorArray removeObject:T];
 			}
 
 		}
@@ -149,23 +148,12 @@
 #ifdef LOG
 			NSLog(@"TBCPBListItemBlocked:%@",PosterName);
 #endif
-			[ret removeObjectAtIndex:i];
-			i=i+1;
-			[tmp.iSignatureRichTextVO.attributedString.mutableString setString:TiebaBlockNote];
-			[tmp.iRichTextVO.attributedString.mutableString setString:TiebaBlockNote];
-			tmp.contentArray=[NSMutableArray array];
-			tmp.bimg_format=@"";
-			tmp.bimg_url=@"";
-			tmp.iRichTextVO.shareText=TiebaBlockNote;
-			tmp.iRichTextVO.richTextCopyString=[NSMutableString stringWithString:TiebaBlockNote];
-			tmp.iRichTextVO.iVedioArray=[NSMutableArray array];
-			tmp.iRichTextVO.iEmojiArray=[NSMutableArray array];
-			tmp.iRichTextVO.iImageArray=[NSMutableArray array];
-			tmp.xiaoYingInfo=[NSDictionary dictionary];
+			[ret removeObject:tmp];
 
 		}else{
-
-			//NSLog(@"TBCPBListItemName:%@",PosterName);
+#ifdef LOG
+			NSLog(@"TBCPBListItemName:%@",PosterName);
+#endif
 		}
 
 	}
