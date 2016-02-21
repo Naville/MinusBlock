@@ -2,7 +2,7 @@
 #import <substrate.h>
 #import <UIKit/UIKit.h>
 
-#define LOG
+//#define LOG
 
 @interface TBRichTextVO : NSObject
 @property(copy, nonatomic) NSString *shareText; // @synthesize shareText;
@@ -109,13 +109,13 @@
 			NSLog(@"TBCFloorListItemBlocked:%@",PosterName);
 #endif
 			[ret removeObject:tmp];
-			/*[tmp.iRichTextVO.attributedString.mutableString setString:TiebaBlockNote];
-			tmp.iRichTextVO.shareText=TiebaBlockNote;
-			tmp.iRichTextVO.richTextCopyString=[NSMutableString stringWithString:TiebaBlockNote];
-			tmp.iRichTextVO.iVedioArray=[NSMutableArray array];
-			tmp.iRichTextVO.iEmojiArray=[NSMutableArray array];
-			tmp.iRichTextVO.iImageArray=[NSMutableArray array];
-			tmp.contentArray=[NSArray array];*/
+			//[tmp.iRichTextVO.attributedString.mutableString setString:TiebaBlockNote];
+			//tmp.iRichTextVO.shareText=TiebaBlockNote;
+			//tmp.iRichTextVO.richTextCopyString=[NSMutableString stringWithString:TiebaBlockNote];
+			//tmp.iRichTextVO.iVedioArray=[NSMutableArray array];
+			//tmp.iRichTextVO.iEmojiArray=[NSMutableArray array];
+			//tmp.iRichTextVO.iImageArray=[NSMutableArray array];
+			//tmp.contentArray=[NSArray array];
 		}else{
 #ifdef LOG
 			NSLog(@"TBCFloorListItem:PosterName:%@",PosterName);
@@ -127,11 +127,12 @@
 	return ret;
 }
 %end
+
 %hook TBCPBListItem
--(id)items{
+-(NSMutableArray*)items{
 	//楼里的回贴列表
 	//List of TBCPBCellItem*
-	NSMutableArray* ret=[%orig mutableCopy];
+	NSMutableArray* ret=%orig;
 	for(int i=0;i<ret.count;i++){
 		TBCPBCellItem* tmp=[ret objectAtIndex:i]; 
 		for(int j=0;j<tmp.replyFloorArray.count;j++){
