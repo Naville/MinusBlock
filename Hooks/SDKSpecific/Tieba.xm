@@ -99,7 +99,7 @@
 %end
 %hook TBCFloorListItem
 -(NSMutableArray*)subpostArray{
-	NSMutableArray* ret=[%orig mutableCopy];
+	NSMutableArray* ret=%orig;
 	for(int i=0;i<ret.count;i++){
 		TBCFloorItem* tmp=[ret objectAtIndex:i];
 		NSString* PosterName=tmp.authorInfo.uNameShow;
