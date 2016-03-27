@@ -24,6 +24,7 @@ def toggleModule():
 			#toggleString=toggleString+"#ifdef"+" "+componentName+"\n"
 			toggleString+="extern  void init_"+componentName+"_hook();\n"
 			toggleString+="init_"+componentName+"_hook();\n";
+			toggleString+="NSLog(@\""+componentName+"Init \");\n";
 			#toggleString+="#endif\n"
 	APIFileList=listdir("./Hooks/APIHooks/")
 	for x in APIFileList:
@@ -40,6 +41,7 @@ def toggleModule():
 			toggleString+="extern void init_"+componentName+"_hook();\n"
 			#toggleString=toggleString+"#ifdef"+" "+componentName+"\n"
 			toggleString+="init_"+componentName+"_hook();\n";
+			toggleString+="NSLog(@\""+componentName+"Init \");\n";
 			#toggleString+="#endif\n"
 	AdWallFileList=listdir("./Hooks/AdWall/")
 	for x in AdWallFileList:
@@ -56,6 +58,7 @@ def toggleModule():
 			toggleString+="extern void init_"+componentName+"_hook();\n"
 			#toggleString=toggleString+"#ifdef"+" "+componentName+"\n"
 			toggleString+="init_"+componentName+"_hook();\n";
+			toggleString+="NSLog(@\""+componentName+"Init \");\n";
 			#toggleString+="#endif\n"
 		#print toggleString
 	toggleString+="}\n"

@@ -30,6 +30,7 @@ for(int i=0;i<fileList.count;i++){
 
 }
 %ctor{
+	NSLog(@"----------MinusBlock----------");
 	MoveIAPCrazy();
 	NSString* Identifer=[[NSBundle mainBundle] bundleIdentifier];
 	if([Identifer hasPrefix:@"com.apple"]&&Identifer!=nil){

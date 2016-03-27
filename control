@@ -1,7 +1,7 @@
 Package: naville.minusblock
 Name: MinusBlock
 Depends: mobilesubstrate
-Version: 22.0.0
+Version: 23.1.0
 Architecture: iphoneos-arm
 Description: Advanced Advertisement Blocking System
 Maintainer: Naville
