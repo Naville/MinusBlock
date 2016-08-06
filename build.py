@@ -121,7 +121,6 @@ else:
 	print "Theos Link Exists at"+os.getcwd()+"/theos"+",Building"
 makeFileString+="include theos/makefiles/common.mk\n"
 makeFileString+="export ARCHS = armv7 armv7s arm64\n"
-makeFileString+="export TARGET = iphone:clang:7.0:7.0\n"
 makeFileString+="TWEAK_NAME = "+randomTweakName+"\n"
 makeFileString+=randomTweakName+subModuleList()+"\n"
 makeFileString+="ADDITIONAL_CCFLAGS  = -Qunused-arguments\n"
